@@ -530,8 +530,6 @@
 	<div
 		class="mt-0 hidden w-[25%] flex-col rounded-lg bg-[#CDE6EA] p-4 text-[#004E86] shadow-md md:flex"
 	>
-		<div class="mb-4 ml-10 text-xl font-bold">AI Nursing Engine</div>
-
 		<div class="mb-4 ml-12 flex flex-row gap-2 text-[14.91px] font-[600]">
 			<svg
 				width="25"
@@ -1053,7 +1051,6 @@
 									placeholder="Ask me anything..."
 									bind:value={inputValue}
 								/>
-
 								<button class="absolute top-[0.90rem] right-4" on:click={sendMessage}>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
