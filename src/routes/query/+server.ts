@@ -2,11 +2,13 @@ import { GEMINI_API } from '$env/static/private';
 import type { ChatCompletionMessageParam } from 'openai/src/resources/index.js';
 import type { RequestHandler } from './$types';
 import OpenAI from 'openai';
-import { base64Encode } from '@firebase/util';
-function toDataURL(url: string) {
-	return fetch(url)
-		.then((response) => response.blob())
-		.then((blob) => blob.text().then((str) => base64Encode(str)));
+async function toDataURL(url: string) {
+	const res = await fetch(url);
+	const mimeType = res.headers.get('content-type') || 'image/jpeg';
+	const arrayBuffer = await res.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
+	const base64 = buffer.toString('base64');
+	return { base64, mimeType };
 }
 
 async function build_prompt(
@@ -25,11 +27,12 @@ async function build_prompt(
 	for (let i = 0; i < messages.length; i++) {
 		let message: ChatCompletionMessageParam;
 		if (messages[i].image) {
+			const { base64, mimeType } = await toDataURL(messages[i].image);
 			message = {
 				role: 'user',
 				content: [
 					{ type: 'text', text: 'image' },
-					{ type: 'image_url', image_url: messages[i].image }
+					{ type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64}` } }
 				]
 			};
 		} else {
