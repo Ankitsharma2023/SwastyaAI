@@ -36,6 +36,11 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-		"flowbite-svelte": "^0.48.4"
+		"chart.js": "^4.4.8",
+		"firebase": "^11.4.0",
+		"flowbite-svelte": "^0.48.4",
+		"flowbite-svelte-icons": "^2.0.2",
+		"openai": "^4.86.2",
+		"tesseract.js": "^6.0.0"
 	}
 }
