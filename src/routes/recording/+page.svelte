@@ -282,7 +282,7 @@
 	}
 </script>
 
-<main class="flex md:ml-4 justify-center items-start gap-10 pt-0">
+<main class="flex items-start justify-center gap-10 pt-0 md:ml-4">
 	<button
 		class=" absolute top-16 left-4 md:hidden"
 		on:click={() => {
@@ -336,17 +336,17 @@
 		{/if}
 	</button>
 	<div
-		class="w-[30%] z-50 {!show_sub
+		class="z-50 w-[30%] {!show_sub
 			? 'hidden'
-			: ''} md:hidden top-24 left-4 absolute bg-[#CDE6EA] p-2 rounded-lg shadow-md text-[#004E86]"
+			: ''} absolute top-24 left-4 rounded-lg bg-[#CDE6EA] p-2 text-[#004E86] shadow-md md:hidden"
 	>
-		<div class="text-xl mb-4 font-bold text-center w-full flex flex-row">Recording Overview</div>
+		<div class="mb-4 flex w-full flex-row text-center text-xl font-bold">Recording Overview</div>
 		<div class="w-full border-[2px] border-[#ffffff]"></div>
 
-		<ul class="space-y-2 flex">
+		<ul class="flex space-y-2">
 			{#each menu as item}
 				<button
-					class="w-full text-left p-2 rounded-lg cursor-pointer flex flex-row items-center justify-start"
+					class="flex w-full cursor-pointer flex-row items-center justify-start rounded-lg p-2 text-left"
 					on:click={() => {
 						nav_tab = item.tab;
 					}}
@@ -357,15 +357,15 @@
 		</ul>
 	</div>
 	<div
-		class="w-[25%] hidden md:flex flex-col mt-0 bg-[#CDE6EA] p-4 rounded-lg shadow-md text-[#004E86]"
+		class="mt-0 hidden w-[25%] flex-col rounded-lg bg-[#CDE6EA] p-4 text-[#004E86] shadow-md md:flex"
 	>
-		<div class="text-xl mb-4 font-bold ml-10">Recording Overview</div>
+		<div class="mb-4 ml-10 text-xl font-bold">Recording Overview</div>
 
-		<div class="w-full border-[2px] border-[#ffffff] mb-2 -mt-3"></div>
-		<ul class="flex flex-col justify-start items-start space-y-2">
+		<div class="-mt-3 mb-2 w-full border-[2px] border-[#ffffff]"></div>
+		<ul class="flex flex-col items-start justify-start space-y-2">
 			{#each menu as item}
 				<button
-					class="w-full p-2 rounded-lg cursor-pointer flex flex-row items-start justify-start hover:bg-slate-100"
+					class="flex w-full cursor-pointer flex-row items-start justify-start rounded-lg p-2 hover:bg-slate-100"
 					on:click={() => {
 						nav_tab = item.tab;
 					}}
@@ -375,14 +375,14 @@
 			{/each}
 		</ul>
 	</div>
-	<div class="w-full md:w-[80%] flex flex-col justify-center items-center gap-y-5">
+	<div class="flex w-full flex-col items-center justify-center gap-y-5 md:w-[80%]">
 		{#if nav_tab === 'recording'}
-			<h1 class=" text-2xl md:text-4xl font-[600] text-[#AAAAAA]">Recording Copilot</h1>
+			<h1 class=" text-2xl font-[600] text-[#AAAAAA] md:text-4xl">Recording Copilot</h1>
 			<div
-				class=" w-[90%] md:w-[40%] flex flex-row border-[1px] border-[#004E86] justify-around rounded-2xl text-[#AAAAAA]"
+				class=" flex w-[90%] flex-row justify-around rounded-2xl border-[1px] border-[#004E86] text-[#AAAAAA] md:w-[40%]"
 			>
 				<button
-					class="rounded-2xl p-1 w-1/2 h-full {active_tab === 'record'
+					class="h-full w-1/2 rounded-2xl p-1 {active_tab === 'record'
 						? 'border-[1px] border-[#004E86] bg-[#DEEDF3] text-[#004E86]'
 						: 'text-[#004E86]'}"
 					on:click={() => {
@@ -390,7 +390,7 @@
 					}}>Recorder</button
 				>
 				<button
-					class="rounded-2xl p-1 w-1/2 h-full {active_tab === 'meet'
+					class="h-full w-1/2 rounded-2xl p-1 {active_tab === 'meet'
 						? 'border-[1px] border-[#004E86] bg-[#DEEDF3] text-[#004E86]'
 						: 'text-[#004E86]'}"
 					on:click={() => {
@@ -408,16 +408,16 @@
 				{/if}
 				<Recorder on:recorderHandler={recorderHandler} />
 				{#if transcriptionContent}
-					<div class="w-full bg-[#ffffff] text-xl px-2 font-[600] flex flex-row justify-start">
+					<div class="flex w-full flex-row justify-start bg-[#ffffff] px-2 text-xl font-[600]">
 						{transcriptionContent}
 					</div>
 				{/if}
 			{:else}
-				<div class="border-[1px] w-[95%] md:w-[80%] border-[#004E86B8] bg-[#F0FDFF] rounded-[15px]">
+				<div class="w-[95%] rounded-[15px] border-[1px] border-[#004E86B8] bg-[#F0FDFF] md:w-[80%]">
 					<div
-						class="border-b-[1px] p-2 md:p-4 md:px-8 flex flex-row w-full justify-between border-[#004E86B8]"
+						class="flex w-full flex-row justify-between border-b-[1px] border-[#004E86B8] p-2 md:p-4 md:px-8"
 					>
-						<div class="font-[600] text-[#706D6D] flex flex-row gap-2 items-center">
+						<div class="flex flex-row items-center gap-2 font-[600] text-[#706D6D]">
 							<svg
 								width="33"
 								height="33"
@@ -455,8 +455,8 @@
 
 							Calendar Meetings
 						</div>
-						<div class="flex flex-row justify-around items-center gap-2">
-							<div class="text-[#706D6D] text-sm gap-2 flex flex-row">
+						<div class="flex flex-row items-center justify-around gap-2">
+							<div class="flex flex-row gap-2 text-sm text-[#706D6D]">
 								<svg
 									width="27"
 									height="16"
@@ -483,7 +483,7 @@
 								Connected
 							</div>
 							<button
-								class="px-4 py-2 bg-[#F0FDFF] border-[1px] border-[#004E86B8] text-[#004E86] flex flex-row rounded-xl shadow-lg"
+								class="flex flex-row rounded-xl border-[1px] border-[#004E86B8] bg-[#F0FDFF] px-4 py-2 text-[#004E86] shadow-lg"
 							>
 								<svg
 									width="27"
@@ -533,33 +533,33 @@
 							</button>
 						</div>
 					</div>
-					<div class="flex flex-col p-2 w-full justify-center items-center gap-4">
+					<div class="flex w-full flex-col items-center justify-center gap-4 p-2">
 						<div class="text-[#706D6D]">
 							Choose which meetings AI Nursing Meetbot will automatically join.
 						</div>
 						<input
-							class="p-3 rounded-2xl w-[85%] border-[1px] border-[#004E86B8]"
+							class="w-[85%] rounded-2xl border-[1px] border-[#004E86B8] p-3"
 							placeholder="Join all calendar events with web a web-conf link"
 						/>
-						<div class="flex flex-row w-[85%] justify-evenly items-center">
-							<div class="flex flex-col gap-3 text-[#004E86B8] font-[600] items-center">
+						<div class="flex w-[85%] flex-row items-center justify-evenly">
+							<div class="flex flex-col items-center gap-3 font-[600] text-[#004E86B8]">
 								Zoom<Checkbox color="blue" />
 							</div>
-							<div class="flex flex-col gap-3 text-[#004E86B8] font-[600] items-center">
+							<div class="flex flex-col items-center gap-3 font-[600] text-[#004E86B8]">
 								Google Meet<Checkbox color="blue" />
 							</div>
-							<div class="flex flex-col gap-3 text-[#004E86B8] font-[600] items-center">
+							<div class="flex flex-col items-center gap-3 font-[600] text-[#004E86B8]">
 								Microsoft Teams<Checkbox color="blue" />
 							</div>
-							<div class="flex flex-col gap-3 text-[#004E86B8] font-[600] items-center">
+							<div class="flex flex-col items-center gap-3 font-[600] text-[#004E86B8]">
 								Custom Add<Checkbox color="blue" />
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="border-[1px] w-[95%] md:w-[80%] border-[#004E86B8] bg-[#F0FDFF] rounded-[15px]">
-					<div class="flex flex-col p-2 w-full justify-center items-center gap-4">
-						<div class="text-[#706D6D] flex flex-row items-center w-full justify-start px-4 p-2">
+				<div class="w-[95%] rounded-[15px] border-[1px] border-[#004E86B8] bg-[#F0FDFF] md:w-[80%]">
+					<div class="flex w-full flex-col items-center justify-center gap-4 p-2">
+						<div class="flex w-full flex-row items-center justify-start p-2 px-4 text-[#706D6D]">
 							<svg
 								width="35"
 								height="45"
@@ -600,13 +600,13 @@
 							</svg>
 							&nbsp Add to live adhoc meeting.
 						</div>
-						<div class="flex flex-row w-[85%] justify-evenly items-center">
+						<div class="flex w-[85%] flex-row items-center justify-evenly">
 							<input
-								class="p-3 rounded-2xl w-[85%] border-[1px] border-[#004E86B8]"
+								class="w-[85%] rounded-2xl border-[1px] border-[#004E86B8] p-3"
 								placeholder="Join all calendar events with web a web-conf link"
 							/>
 							<button
-								class="px-8 py-2 bg-[#004E86B8] border-[1px] border-[#004E86B8] text-white font-semibold flex flex-row rounded-xl shadow-lg"
+								class="flex flex-row rounded-xl border-[1px] border-[#004E86B8] bg-[#004E86B8] px-8 py-2 font-semibold text-white shadow-lg"
 							>
 								Join
 							</button>
@@ -617,24 +617,24 @@
 		{:else}
 			<h1 class="text-4xl font-[600] text-[#AAAAAA]">Recording History</h1>
 			{#if !selectedTranscript}
-				<div class="w-full p-2 bg-[#F0FDFF]">
+				<div class="w-full bg-[#F0FDFF] p-2">
 					{#each $trnscpt as tr, index}
 						{#each Object.entries(tr) as [k, v]}
 							<button
-								class="w-full bg-[#ffffff] flex flex-row justify-between p-4 my-2"
+								class="my-2 flex w-full flex-row justify-between bg-[#ffffff] p-4"
 								on:click={() => {
 									selectedTranscript = [index, k];
 								}}
 							>
-								<div class="text-xl w-1/2 font-[600] flex flex-row justify-start">{k}</div>
+								<div class="flex w-1/2 flex-row justify-start text-xl font-[600]">{k}</div>
 							</button>
 						{/each}
 					{/each}
 				</div>
 			{:else}
-				<div class="flex flex-col md:flex-row w-full bg-[#F0FDFF] items-start gap-4 h-full">
-					<div class="flex flex-col items-start justify-center w-2/3 bg-[#F0FDFF] gap-4 p-4">
-						<div class="flex flex-row p-2 justify-between gap-5">
+				<div class="flex h-full w-full flex-col items-start gap-4 bg-[#F0FDFF] md:flex-row">
+					<div class="flex w-2/3 flex-col items-start justify-center gap-4 bg-[#F0FDFF] p-4">
+						<div class="flex flex-row justify-between gap-5 p-2">
 							<button
 								on:click={() => {
 									selectedTranscript = null;
@@ -662,11 +662,11 @@
 									/>
 								</svg></button
 							>
-							<div class="flex flex-row w-full justify-center font-[600] text-2xl text-[#3D4D5C]">
+							<div class="flex w-full flex-row justify-center text-2xl font-[600] text-[#3D4D5C]">
 								{selectedTranscript[1]}
 							</div>
 						</div>
-						<div class="w-1/2 text-sm text-[#706D6D] flex flex-row justify-between">
+						<div class="flex w-1/2 flex-row justify-between text-sm text-[#706D6D]">
 							{selectedTranscript[1].split('-')[1]}<span class="flex flex-row items-center"
 								>Add Tags &nbsp<svg
 									width="17"
@@ -685,8 +685,8 @@
 							</span>
 						</div>
 
-						<div class="flex flex-row w-full justify-between">
-							<div class="flex flex-row justify-start gap-5 w-1/3">
+						<div class="flex w-full flex-row justify-between">
+							<div class="flex w-1/3 flex-row justify-start gap-5">
 								<button
 									on:click={() => {
 										contentEditable = !contentEditable;
@@ -785,7 +785,7 @@
 									</svg>
 								</button>
 							</div>
-							<div class="flex flex-row justify-end w-1/3">
+							<div class="flex w-1/3 flex-row justify-end">
 								<button
 									on:click={() => {
 										deleteTranscription(selectedTranscript[0]);
@@ -852,7 +852,7 @@
 						</div>
 						<div class="flex flex-row gap-5">
 							<button
-								class="px-4 py-2 bg-[#004E86] text-white flex flex-row rounded-xl shadow-lg"
+								class="flex flex-row rounded-xl bg-[#004E86] px-4 py-2 text-white shadow-lg"
 								on:click={() => {
 									saveTranscription(selectedTranscript[1], edited_text, selectedTranscript[0]);
 								}}
@@ -876,7 +876,7 @@
 								&nbsp; Sync to EHR
 							</button>
 							<button
-								class="px-4 py-2 bg-[white] text-[#004E86] flex flex-row rounded-xl shadow-lg"
+								class="flex flex-row rounded-xl bg-[white] px-4 py-2 text-[#004E86] shadow-lg"
 								on:click={() => {
 									edit_mode = !edit_mode;
 								}}
@@ -921,7 +921,7 @@
 								&nbsp; AI Customize
 							</button>
 							<button
-								class="px-4 py-2 bg-[white] text-black flex flex-row rounded-xl shadow-lg"
+								class="flex flex-row rounded-xl bg-[white] px-4 py-2 text-black shadow-lg"
 								on:click={() => {
 									contentEditable = !contentEditable;
 								}}
@@ -971,12 +971,12 @@
 							</button>
 						</div>
 						{#if edit_mode}
-							<div class="bg-white w-full p-4 rounded-xl shadow-lg">
+							<div class="w-full rounded-xl bg-white p-4 shadow-lg">
 								<div class="text-[#706D6D]">Edit your Transcription</div>
-								<div class="w-full border-2 border-[#004E86] rounded-[25px] flex flex-row">
-									<input class="w-[75%] p-4 border-0 inputBox" bind:value={inputValue} />
+								<div class="flex w-full flex-row rounded-[25px] border-2 border-[#004E86]">
+									<input class="inputBox w-[75%] border-0 p-4" bind:value={inputValue} />
 									<button
-										class="w-[25%] apply"
+										class="apply w-[25%]"
 										on:click={() => {
 											editTranscription(
 												$trnscpt[selectedTranscript[0]][selectedTranscript[1]].content
@@ -987,12 +987,12 @@
 							</div>
 						{/if}
 						<button
-							class="w-full bg-[#ffffff] flex flex-row justify-between p-4"
+							class="flex w-full flex-row justify-between bg-[#ffffff] p-4"
 							on:click={() => {
 								show_summary = !show_summary;
 							}}
 						>
-							<div class="text-xl w-full font-[600] flex flex-row justify-between items-center">
+							<div class="flex w-full flex-row items-center justify-between text-xl font-[600]">
 								Summary
 								<div class="">
 									{#if !show_summary}
@@ -1026,7 +1026,7 @@
 							</div>
 						</button>
 						{#if show_summary}
-							<div class="w-full flex flex-col justify-center gap-2">
+							<div class="flex w-full flex-col justify-center gap-2">
 								{#each keys as K}
 									{#if $trnscpt[selectedTranscript[0]][selectedTranscript[1]].summary[K] !== ''}
 										<div class="w-full text-wrap">
@@ -1035,8 +1035,9 @@
 													<span class="text-lg font-bold text-[#867b00]">{K}:</span>
 													<span
 														contenteditable="true"
-														bind:innerText={$trnscpt[selectedTranscript[0]][selectedTranscript[1]]
-															.summary[K]}
+														bind:innerText={
+															$trnscpt[selectedTranscript[0]][selectedTranscript[1]].summary[K]
+														}
 													></span>
 												</div>
 											{:else}
@@ -1058,12 +1059,12 @@
 							</div>
 						{/if}
 						<button
-							class="w-full bg-[#ffffff] flex flex-row justify-between p-4"
+							class="flex w-full flex-row justify-between bg-[#ffffff] p-4"
 							on:click={() => {
 								show_content = !show_content;
 							}}
 						>
-							<div class="text-xl w-full font-[600] flex flex-row justify-between items-center">
+							<div class="flex w-full flex-row items-center justify-between text-xl font-[600]">
 								Original Transcription
 								<div class="">
 									{#if !show_content}
@@ -1097,7 +1098,7 @@
 							</div>
 						</button>
 						{#if show_content}
-							<div class="w-full flex flex-row justify-center">
+							<div class="flex w-full flex-row justify-center">
 								<pre class="w-full text-wrap">{$trnscpt[selectedTranscript[0]][
 										selectedTranscript[1]
 									].content}</pre>
@@ -1106,12 +1107,12 @@
 
 						{#if edited_text}
 							<button
-								class="w-full bg-[#ffffff] flex flex-row justify-between p-4"
+								class="flex w-full flex-row justify-between bg-[#ffffff] p-4"
 								on:click={() => {
 									show_edited = !show_edited;
 								}}
 							>
-								<div class="text-xl w-full font-[600] flex flex-row justify-between items-center">
+								<div class="flex w-full flex-row items-center justify-between text-xl font-[600]">
 									Edited Transcription
 									<div class="">
 										{#if !show_edited}
@@ -1145,16 +1146,16 @@
 								</div>
 							</button>
 							{#if show_edited}
-								<div class="w-full flex flex-row justify-center">
+								<div class="flex w-full flex-row justify-center">
 									<pre class="text-wrap">{edited_text}</pre>
 								</div>
 							{/if}
 						{/if}
 					</div>
-					<div class="flex flex-col items-start justify-center w-1/3 gap-3 h-full p-4">
-						<h1 class="text-[#004E86] text-xl font-semibold">Generate More</h1>
-						<div class="flex flex-col text-[#004E86] gap-2">
-							<div class="flex flex-row gap-2 items-center">
+					<div class="flex h-full w-1/3 flex-col items-start justify-center gap-3 p-4">
+						<h1 class="text-xl font-semibold text-[#004E86]">Generate More</h1>
+						<div class="flex flex-col gap-2 text-[#004E86]">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1171,7 +1172,7 @@
 								</svg>
 								Visit Summary
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1188,7 +1189,7 @@
 								</svg>
 								Action Items
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1205,7 +1206,7 @@
 								</svg>
 								SOAP Notes
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1222,7 +1223,7 @@
 								</svg>
 								Treatment Plan
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1239,7 +1240,7 @@
 								</svg>
 								Medical Coding
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1256,7 +1257,7 @@
 								</svg>
 								H&P Session
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1273,7 +1274,7 @@
 								</svg>
 								Process Reflection
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1290,7 +1291,7 @@
 								</svg>
 								Discharge Summary
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1307,7 +1308,7 @@
 								</svg>
 								Pre-Op Notes
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
@@ -1324,7 +1325,7 @@
 								</svg>
 								Nursing Hand Overs
 							</div>
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row items-center gap-2">
 								<svg
 									width="17"
 									height="17"
