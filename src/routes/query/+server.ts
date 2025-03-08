@@ -29,7 +29,7 @@ async function build_prompt(
 				role: 'user',
 				content: [
 					{ type: 'text', text: 'image' },
-					{ type: 'image_url', image_url: { url: messages[i].image } }
+					{ type: 'image_url', image_url: messages[i].image }
 				]
 			};
 		} else {

@@ -198,6 +198,7 @@
 			{err.message}
 		</Toast>
 	{/if}
+
 	<div class="text-2xl font-bold">SwastyaAI</div>
 
 	<div class="w-full border-[1px] border-[#93B6CF]"></div>
@@ -227,6 +228,7 @@
 			/>
 			<div class="flex items-start pt-1 pb-1">
 				<input type="checkbox" id="terms" bind:checked={termsAccepted} required />
+
 				<label for="terms" class="ml-2 text-left text-xs"
 					>I acknowledge that this is a learning model and information provided is for educational
 					purpose only.</label
@@ -318,6 +320,7 @@
 			{:else}
 				<div class="flex items-start pt-1 pb-1">
 					<input type="checkbox" id="terms" bind:checked={termsAccepted} required />
+
 					<label for="terms" class="ml-2 text-left text-xs"
 						>I acknowledge that this is a learning model and information provided is for educational
 						purpose only.</label
