@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { Input, Label, Modal, Select, SpeedDial, SpeedDialButton, Toast } from 'flowbite-svelte';
 	import { onDestroy, onMount } from 'svelte';
+	import { marked } from 'marked';
 	import {
 		nurses,
 		patients_data,
@@ -419,7 +420,7 @@
 	}
 </script>
 
-<div class="flex md:ml-4 justify-center items-start pt-0 w-full">
+<div class="flex w-full items-start justify-center pt-0 md:ml-4">
 	<button
 		class=" absolute top-16 left-4 md:hidden"
 		on:click={() => {
@@ -473,23 +474,23 @@
 		{/if}
 	</button>
 	<div
-		class="w-[45%] z-50 {!show_sub
+		class="z-50 w-[45%] {!show_sub
 			? 'hidden'
-			: ''} md:hidden top-24 left-4 absolute bg-[#CDE6EA] p-4 rounded-lg shadow-md text-[#004E86]"
+			: ''} absolute top-24 left-4 rounded-lg bg-[#CDE6EA] p-4 text-[#004E86] shadow-md md:hidden"
 	>
 		<ul class="space-y-2">
 			{#if nav_tab === 'patients'}
 				{#each Object.entries(ehr) as [name, data]}
 					<li>
 						<button
-							class="w-full text-left p-2 rounded-lg cursor-pointer flex flex-row"
+							class="flex w-full cursor-pointer flex-row rounded-lg p-2 text-left"
 							on:click={() => (activePatient = activePatient === name ? null : name)}
 						>
 							{name}
 						</button>
 					</li>
 				{/each}
-				<button class="relative bottom-0 right-0" on:click={() => (nav_tab = 'menu')}>
+				<button class="relative right-0 bottom-0" on:click={() => (nav_tab = 'menu')}>
 					<svg
 						width="25"
 						height="25"
@@ -515,7 +516,7 @@
 			{:else}
 				{#each menu as item}
 					<button
-						class="w-full text-left p-2 rounded-lg cursor-pointer flex flex-row"
+						class="flex w-full cursor-pointer flex-row rounded-lg p-2 text-left"
 						on:click={() => {
 							nav_tab = item.tab;
 						}}
@@ -527,11 +528,11 @@
 		</ul>
 	</div>
 	<div
-		class="w-[25%] hidden md:flex flex-col mt-0 bg-[#CDE6EA] p-4 rounded-lg shadow-md text-[#004E86]"
+		class="mt-0 hidden w-[25%] flex-col rounded-lg bg-[#CDE6EA] p-4 text-[#004E86] shadow-md md:flex"
 	>
-		<div class="text-xl mb-4 font-bold ml-10">AI Nursing Engine</div>
+		<div class="mb-4 ml-10 text-xl font-bold">AI Nursing Engine</div>
 
-		<div class="mb-4 ml-12 font-[600] text-[14.91px] flex flex-row gap-2">
+		<div class="mb-4 ml-12 flex flex-row gap-2 text-[14.91px] font-[600]">
 			<svg
 				width="25"
 				height="25"
@@ -584,20 +585,20 @@
 			</svg>
 			Patients Overview
 		</div>
-		<div class="w-full border-[2px] border-[#ffffff] mb-2 -mt-3"></div>
+		<div class="-mt-3 mb-2 w-full border-[2px] border-[#ffffff]"></div>
 		<ul class="space-y-2">
 			{#if nav_tab === 'patients'}
 				{#each Object.entries(ehr) as [name, data]}
 					<li>
 						<button
-							class="w-full text-left p-2 rounded-lg cursor-pointer flex flex-row"
+							class="flex w-full cursor-pointer flex-row rounded-lg p-2 text-left"
 							on:click={() => (activePatient = activePatient === name ? null : name)}
 						>
 							{name}
 						</button>
 					</li>
 				{/each}
-				<button class="relative bottom-0 right-0" on:click={() => (nav_tab = 'menu')}>
+				<button class="relative right-0 bottom-0" on:click={() => (nav_tab = 'menu')}>
 					<svg
 						width="25"
 						height="25"
@@ -623,7 +624,7 @@
 			{:else}
 				{#each menu as item}
 					<button
-						class="w-full text-left p-2 rounded-lg cursor-pointer flex flex-row"
+						class="flex w-full cursor-pointer flex-row rounded-lg p-2 text-left"
 						on:click={() => {
 							nav_tab = item.tab;
 						}}
@@ -635,11 +636,11 @@
 		</ul>
 	</div>
 
-	<div class="w-full md:w-[85%] p-6 flex flex-col justify-center items-center gap-y-2">
+	<div class="flex w-full flex-col items-center justify-center gap-y-2 p-6 md:w-[85%]">
 		{#if nav_tab === 'patients' || nav_tab === 'menu'}
 			{#if activePatient}
-				<div class="bg-gray-100 p-6 rounded-lg shadow-md">
-					<h2 class="text-2xl font-bold text-blue-600 mb-4">{activePatient}</h2>
+				<div class="rounded-lg bg-gray-100 p-6 shadow-md">
+					<h2 class="mb-4 text-2xl font-bold text-blue-600">{activePatient}</h2>
 					<div class="text-start">
 						{#each keys as key}
 							{#if ehr[activePatient][key] !== ''}
@@ -661,9 +662,9 @@
 				<Graph bind:q={selectedPatient} />
 			{:else}
 				<h1 class="text-4xl font-[600] text-[#AAAAAA]">Patient Queue</h1>
-				<div class="relative w-full md:w-3/4 h-[48px]">
+				<div class="relative h-[48px] w-full md:w-3/4">
 					<input
-						class="bg-[#CDE6EA] w-full h-full shadow-xl rounded-lg text-[#004E86] pl-12"
+						class="h-full w-full rounded-lg bg-[#CDE6EA] pl-12 text-[#004E86] shadow-xl"
 						bind:value={searchName}
 						placeholder="Search for a patient"
 					/>
@@ -696,16 +697,16 @@
 						</svg>
 					</div>
 				</div>
-				<div class=" flex flex-row justify-end w-full">
+				<div class=" flex w-full flex-row justify-end">
 					<button
-						class="rounded-2xl mr-32 mt-4 text-[#004E86] font-bold bg-[#CDE6EA] max-w-fit p-2 px-4 shadow-lg border-2 border-[#004E86]"
+						class="mt-4 mr-32 max-w-fit rounded-2xl border-2 border-[#004E86] bg-[#CDE6EA] p-2 px-4 font-bold text-[#004E86] shadow-lg"
 						on:click={() => (formModal = true)}>Add Patient</button
 					>
 					<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
 						{#if t.msg}
 							<Toast color={t.color}>
 								<svelte:fragment slot="icon">
-									<CloseCircleSolid class="w-5 h-5" />
+									<CloseCircleSolid class="h-5 w-5" />
 								</svelte:fragment>
 								{t.msg}
 							</Toast>
@@ -745,7 +746,7 @@
 
 							<button
 								type="button"
-								class="w-full py-2 rounded-xl bg-[#CDE6EA] text-[#004E86] hover:bg-[#ceeaef]"
+								class="w-full rounded-xl bg-[#CDE6EA] py-2 text-[#004E86] hover:bg-[#ceeaef]"
 								on:click={addPatient}
 							>
 								Add
@@ -753,8 +754,8 @@
 						</form>
 					</Modal>
 				</div>
-				<div class="overflow-x-auto w-full md:w-3/4">
-					<table class="min-w-full table-auto text-left border-2">
+				<div class="w-full overflow-x-auto md:w-3/4">
+					<table class="min-w-full table-auto border-2 text-left">
 						<thead class="bg-[#CDE6EA]">
 							<tr>
 								<th class="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-white">Name</th>
@@ -777,27 +778,27 @@
 								{#each $queue as patient, index}
 									{#if patient.name.startsWith(searchName)}
 										<tr class="border-b hover:bg-gray-50">
-											<td class="p-2 md:p-4 text-sm text-gray-700 dark:text-white"
+											<td class="p-2 text-sm text-gray-700 md:p-4 dark:text-white"
 												>{patient.name}</td
 											>
-											<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white"
+											<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white"
 												>{patient.room}</td
 											>
-											<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white"
+											<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white"
 												>{patient.age}</td
 											>
-											<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white"
+											<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white"
 												>{patient.gender}</td
 											>
-											<td class="p-2 md:p-4 text-sm text-black dark:text-white"
-												><p class="bg-[#DEEDF3] rounded-xl text-center py-2 md:">
+											<td class="p-2 text-sm text-black md:p-4 dark:text-white"
+												><p class="md: rounded-xl bg-[#DEEDF3] py-2 text-center">
 													{patient.vitals}
 												</p></td
 											>
-											<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white"
+											<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white"
 												>{patient.urgency}</td
 											>
-											<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white">
+											<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white">
 												<SpeedDial defaultClass="text-[#994D4D] font-[700]" trigger="click">
 													<button slot="button" class="flex flex-row"> View </button>
 													<SpeedDialButton
@@ -823,12 +824,12 @@
 											>{patient.gender}</td
 										>
 										<td
-											class="px-4 py-4 text-sm text-black dark:text-white cursor-pointer"
+											class="cursor-pointer px-4 py-4 text-sm text-black dark:text-white"
 											on:click={() => {
 												patient.id = index;
 												show_graph(patient);
 											}}
-											><p class="bg-[#DEEDF3] rounded-xl text-center py-2">{patient.vitals}</p></td
+											><p class="rounded-xl bg-[#DEEDF3] py-2 text-center">{patient.vitals}</p></td
 										>
 										<td class="px-4 py-4 text-sm text-[#994D4D] dark:text-white"
 											>{patient.urgency}</td
@@ -855,9 +856,9 @@
 			{/if}
 		{:else if nav_tab === 'nursing'}
 			<h1 class="text-4xl font-[600] text-[#AAAAAA]">Nursing Team</h1>
-			<div class="relative w-full md:w-3/4 h-[48px]">
+			<div class="relative h-[48px] w-full md:w-3/4">
 				<input
-					class="bg-[#CDE6EA] w-full h-full shadow-xl rounded-lg text-[#004E86] pl-12"
+					class="h-full w-full rounded-lg bg-[#CDE6EA] pl-12 text-[#004E86] shadow-xl"
 					bind:value={searchName}
 					placeholder="Search for a patient"
 				/>
@@ -890,16 +891,16 @@
 					</svg>
 				</div>
 			</div>
-			<div class=" flex flex-row justify-end w-full">
+			<div class=" flex w-full flex-row justify-end">
 				<button
-					class="rounded-2xl mr-32 mt-4 text-[#004E86] font-bold bg-[#CDE6EA] max-w-fit p-2 px-4 shadow-lg border-2 border-[#004E86]"
+					class="mt-4 mr-32 max-w-fit rounded-2xl border-2 border-[#004E86] bg-[#CDE6EA] p-2 px-4 font-bold text-[#004E86] shadow-lg"
 					on:click={() => (formModal = true)}>Add Nurse</button
 				>
 				<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
 					{#if t.msg}
 						<Toast color={t.color}>
 							<svelte:fragment slot="icon">
-								<CloseCircleSolid class="w-5 h-5" />
+								<CloseCircleSolid class="h-5 w-5" />
 							</svelte:fragment>
 							{t.msg}
 						</Toast>
@@ -924,7 +925,7 @@
 
 						<button
 							type="button"
-							class="w-full py-2 rounded-xl bg-[#CDE6EA] text-[#004E86] hover:bg-[#ceeaef]"
+							class="w-full rounded-xl bg-[#CDE6EA] py-2 text-[#004E86] hover:bg-[#ceeaef]"
 							on:click={addNurse}
 						>
 							Add
@@ -932,8 +933,8 @@
 					</form>
 				</Modal>
 			</div>
-			<div class="overflow-x-auto w-full md:w-3/4">
-				<table class="min-w-full table-auto text-left border-2">
+			<div class="w-full overflow-x-auto md:w-3/4">
+				<table class="min-w-full table-auto border-2 text-left">
 					<thead class="bg-[#CDE6EA]">
 						<tr>
 							<th class="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-white">Name</th>
@@ -949,13 +950,13 @@
 							{#each $nurses as patient, index}
 								{#if patient.name.startsWith(searchName)}
 									<tr class="border-b hover:bg-gray-50">
-										<td class="p-2 md:p-4 text-sm text-gray-700 dark:text-white">{patient.name}</td>
-										<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white">{patient.room}</td
+										<td class="p-2 text-sm text-gray-700 md:p-4 dark:text-white">{patient.name}</td>
+										<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white">{patient.room}</td
 										>
-										<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white"
+										<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white"
 											>{patient.patients_assigned}</td
 										>
-										<td class="p-2 md:p-4 text-sm text-[#994D4D] dark:text-white">
+										<td class="p-2 text-sm text-[#994D4D] md:p-4 dark:text-white">
 											<SpeedDial defaultClass="text-[#994D4D] font-[700]" trigger="click">
 												<button slot="button" class="flex flex-row"> View </button>
 												<SpeedDialButton
@@ -1000,17 +1001,17 @@
 				</table>
 			</div>
 		{:else if nav_tab === 'handover'}
-			<div class="flex flex-col w-full h-[90vh] justify-center items-center">
+			<div class="flex h-[90vh] w-full flex-col items-center justify-center">
 				{#if messages.length > 0}
 					<!--Chats-->
-					<div class="flex flex-col w-full overflow-y-auto h-full gap-4">
+					<div class="flex h-full w-full flex-col gap-4 overflow-y-auto">
 						{#each messages as message}
 							<div class="mb-2">
 								{#if message.text}
 									<div
-										class=" flex flex-row w-full items-center {message.isUser
-											? 'text-right justify-end mr-4 mt-6'
-											: 'text-left justify-start ml-4'}"
+										class=" flex w-full flex-row items-center {message.isUser
+											? 'mt-6 mr-4 justify-end text-right'
+											: 'ml-4 justify-start text-left'}"
 										style="max-width: 98vw;"
 									>
 										{#if !message.isUser}
@@ -1024,7 +1025,9 @@
 										{/if}
 										<div class="flex flex-col">
 											<pre
-												class="p-3 rounded-3xl bg-[#CDE6EA] text-black text-sm text-wrap break-words overflow-hidden font-semibold font-sans">{message.text}</pre>
+												class="flex flex-col justify-center overflow-hidden rounded-3xl bg-[#CDE6EA] p-3 font-sans text-sm font-semibold text-wrap break-words text-black">{#if message.isUser}{message.text}{:else}{@html marked(
+														message.text
+													)}{/if}</pre>
 										</div>
 										{#if message.isUser}
 											<img
@@ -1034,50 +1037,18 @@
 											/>
 										{/if}
 									</div>
-								{:else if message.image}
-									<div
-										class="flex {message.isUser
-											? 'text-right justify-end mr-4'
-											: 'text-left justify-start ml-4'}"
-									>
-										<img
-											src={encodeURI(message.image)}
-											class="max-w-xs"
-											alt="uploaded_image"
-											size="max-w-xs"
-											referrerpolicy="no-referrer"
-										/>
-									</div>
 								{/if}
 							</div>
 						{/each}
 					</div>
 				{/if}
 				<!-- Input -->
-				<div class="flex flex-col justify-center items-center w-[85%] md:w-1/2">
-					<div class="flex flex-row w-full justify-center">
+				<div class="flex w-[85%] flex-col items-center justify-center md:w-1/2">
+					<div class="flex w-full flex-row justify-center">
 						<div class="flex w-full justify-center">
 							<div class="relative w-full md:w-3/4">
-								<button class="absolute top-[0.90rem] left-4">
-									<svg
-										width="25"
-										height="25"
-										viewBox="0 0 25 25"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M4.59326 12.056C4.85909 13.8825 5.77364 15.5522 7.16961 16.7597C8.56557 17.9672 10.3496 18.6317 12.1954 18.6317M12.1954 18.6317C14.0411 18.6317 15.8252 17.9672 17.2211 16.7597C18.6171 15.5522 19.5316 13.8825 19.7975 12.056M12.1954 18.6317V22.4788M12.1965 3.27881C11.3235 3.27881 10.4863 3.62558 9.86907 4.24285C9.25181 4.86011 8.90503 5.6973 8.90503 6.57024V10.9588C8.90503 11.8317 9.25181 12.6689 9.86907 13.2862C10.4863 13.9035 11.3235 14.2502 12.1965 14.2502C13.0694 14.2502 13.9066 13.9035 14.5239 13.2862C15.1411 12.6689 15.4879 11.8317 15.4879 10.9588V6.57024C15.4879 5.6973 15.1411 4.86011 14.5239 4.24285C13.9066 3.62558 13.0694 3.27881 12.1965 3.27881Z"
-											stroke="#49454F"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-								</button>
-
 								<textarea
-									class="w-full pl-12 pt-3 border border-gray-300 rounded-xl h-3/4 resize-none bg-[#DEEDF3] outline-none"
+									class="h-3/4 w-full resize-none rounded-xl border border-gray-300 bg-[#DEEDF3] pt-3 pl-12 outline-none"
 									rows="6"
 									placeholder="Ask me anything..."
 									bind:value={inputValue}
@@ -1099,27 +1070,6 @@
 										/>
 									</svg>
 								</button>
-
-								<div class="absolute bottom-[2.90rem] left-4">
-									<button class="flex flex-row items-center">
-										<svg
-											width="18"
-											height="13"
-											viewBox="0 0 18 13"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												d="M1.25 0.878906H16.3406M3.94475 6.04148H13.6458M7.17845 11.204H10.4121"
-												stroke="#49454F"
-												stroke-width="1.74981"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											/>
-										</svg>
-										&nbsp;Focus
-									</button>
-								</div>
 							</div>
 						</div>
 					</div>
