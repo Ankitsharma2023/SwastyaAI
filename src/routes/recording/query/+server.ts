@@ -1,15 +1,14 @@
 import { GEMINI_API } from '$env/static/private';
-import type { ChatCompletionMessageParam } from 'openai/src/resources/index.js';
 import type { RequestHandler } from './$types';
 import OpenAI from 'openai';
-export async function POST({ request }) {
+export const POST: RequestHandler = async ({ request }) => {
 	const { values } = await request.json();
 	const tmpl =
 		'{"Name":"","Age":"","Gender":"","History of Present Illness":"","Social History":"","Family History":"","Allergies":"","Medications":"","Immunizations":"","Review of Systems":"","Physical Exam":"","Results":"","Procedure":"","Assessment and Plan":""}';
 
 	const openai = new OpenAI({
 		apiKey: GEMINI_API,
-		base_url: 'https://generativelanguage.googleapis.com/v1beta/openai/'
+		baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/'
 	});
 	try {
 		const response = await openai.chat.completions.create({
@@ -30,9 +29,9 @@ export async function POST({ request }) {
 			max_tokens: 1024
 		});
 
-		let report = response.choices[0].message.content.trim();
+		let report = response.choices[0].message.content?.trim();
 		const pattern = /(```json)([\s\S]*?)(```)/;
-		const match = report.match(pattern);
+		const match = report?.match(pattern);
 		if (match) {
 			report = match[2];
 		}
@@ -47,4 +46,4 @@ export async function POST({ request }) {
 			headers: { 'Content-Type': 'application/json' }
 		});
 	}
-}
+};

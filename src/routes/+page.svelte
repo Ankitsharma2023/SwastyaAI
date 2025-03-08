@@ -56,7 +56,7 @@
 						queue.set(q);
 					}
 				})
-				.catch((err) => {
+				.catch(() => {
 					previousChats = [];
 				});
 		}
