@@ -8,7 +8,7 @@ export async function POST({ request }) {
 	});
 	try {
 		const response = await openai.chat.completions.create({
-			model: 'gpt-3.5-turbo',
+			model: 'gemini-2.0-flash',
 			messages: [
 				{
 					role: 'system',
