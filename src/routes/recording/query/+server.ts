@@ -1,6 +1,7 @@
 import { GEMINI_API } from '$env/static/private';
+import type { ChatCompletionMessageParam } from 'openai/src/resources/index.js';
+import type { RequestHandler } from './$types';
 import OpenAI from 'openai';
-
 export async function POST({ request }) {
 	const { values } = await request.json();
 	const tmpl =
@@ -12,7 +13,7 @@ export async function POST({ request }) {
 	});
 	try {
 		const response = await openai.chat.completions.create({
-			model: 'gpt-3.5-turbo',
+			model: 'gemini-2.0-flash',
 			messages: [
 				{
 					role: 'system',
