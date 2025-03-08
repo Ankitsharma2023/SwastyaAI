@@ -7,7 +7,7 @@ async function toDataURL(url: string) {
 	const mimeType = res.headers.get('content-type') || 'image/jpeg';
 	const arrayBuffer = await res.arrayBuffer();
 	const buffer = Buffer.from(arrayBuffer);
-	console.log(mimeType);
+	const base64 = buffer.toString('base64');
 	return { base64, mimeType };
 }
 
